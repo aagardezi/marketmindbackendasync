@@ -443,7 +443,7 @@ def handle_gemini20(prompt, aicontent, logger, PROJECT_ID, LOCATION):
     functioncontent = []
     functioncontent.append(types.Content(role='user', parts=[types.Part(text=prompt)]))
 
-    evaluationagent.evaluation_agent(prompt)
+    # evaluationagent.evaluation_agent(prompt, MODELNAME)
 
     logger.warning("Conversation history start")
     logger.warning(aicontent)
