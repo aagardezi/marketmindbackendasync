@@ -469,6 +469,7 @@ def handle_gemini20(prompt, aicontent, logger, PROJECT_ID, LOCATION):
                                                                                     api_requests_and_responses, 
                                                                                     backend_details, functioncontent, 
                                                                                     handle_external_function, generate_config_20,
+                                                                                    aicontent, messages,
                                                                                     client, logger)
 
 
@@ -476,7 +477,8 @@ def handle_gemini20(prompt, aicontent, logger, PROJECT_ID, LOCATION):
         response, backend_details, functioncontent = handle_gemini20_serial_func(response, 
                                                                                     api_requests_and_responses, 
                                                                                     backend_details, functioncontent, 
-                                                                                    handle_external_function, generate_config_20, 
+                                                                                    handle_external_function, generate_config_20,
+                                                                                    aicontent, messages,
                                                                                     client, logger)
 
     time.sleep(3)
