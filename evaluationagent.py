@@ -1,7 +1,5 @@
 
-import streamlit as st
-from streamlit_float import *
-from streamlit_google_auth import Authenticate
+
 
 
 from google import genai
@@ -90,7 +88,7 @@ generate_config_evalagent = types.GenerateContentConfig(
     tools= [evalagent_20_tool],
 )
 
-def evaluation_agent(prompt):
+def evaluation_agent(prompt, modelname):
     client = genai.Client(
         vertexai=True,
         project=PROJECT_ID,
@@ -99,7 +97,7 @@ def evaluation_agent(prompt):
     aicontent = []
     logger.warning("Strating Eval agnet")
     aicontent.append(types.Content(role='user', parts=[types.Part(text=prompt)]))
-    response = client.models.generate_content(model=st.session_state.modelname,
+    response = client.models.generate_content(model=modelname,
                                                               contents=aicontent,
                                                               config=generate_config_evalagent)
     logger.warning("Eval agent done")

@@ -22,7 +22,7 @@ def hello_gemini(cloud_event):
     aicontent = []
     message_aicontentstring = base64.b64decode(cloud_event.data["message"]["data"])
     message_aicontent = json.loads(message_aicontentstring)
-    for item in message_aicontentstring:
+    for item in message_aicontent:
         aicontent.append(types.Content(role=item["role"], parts=[types.Part(text=item["content"])]))
 
     logger.warning(f"Gemini request context ready: {aicontent}")
