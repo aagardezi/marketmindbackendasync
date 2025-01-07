@@ -1,0 +1,10 @@
+steps:
+  # Build the zip file
+  - name: 'gcr.io/cloud-builders/zip'
+    args: ['-r', 'code.zip', '.']
+    id: 'zip-code'
+
+  # Upload the zip file to Cloud Storage
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['cp', 'code.zip', 'gs://marketmind-backend-code-repo-sg-1/']
+    id: 'upload-to-cloud-storage'

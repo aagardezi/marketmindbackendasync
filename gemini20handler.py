@@ -154,12 +154,12 @@ def handle_external_function(api_requests_and_responses, params, function_name):
                                 [function_name, params, api_response]
                         )
 
-    if function_name in helperbqfunction.function_handler.keys():
-        logger.warning("BQ function found")
-        api_response = helperbqfunction.function_handler[function_name](st.session_state.client, params)
-        api_requests_and_responses.append(
-                                [function_name, params, api_response]
-                        )
+    # if function_name in helperbqfunction.function_handler.keys():
+    #     logger.warning("BQ function found")
+    #     api_response = helperbqfunction.function_handler[function_name](st.session_state.client, params)
+    #     api_requests_and_responses.append(
+    #                             [function_name, params, api_response]
+    #                     )
 
     if function_name in helperfinhub.function_handler.keys():
         logger.warning("finhub function found")
@@ -439,9 +439,9 @@ def handle_gemini20(prompt, aicontent, logger, PROJECT_ID, LOCATION):
 
     logger.warning("Configuring prompt")
     # st.session_state.
-    aicontent.append(types.Content(role='user', parts=[types.Part(text=prompt+PROMPT_ENHANCEMENT )]))
+    aicontent.append(types.Content(role='user', parts=[types.Part(text=prompt)]))
     functioncontent = []
-    functioncontent.append(types.Content(role='user', parts=[types.Part(text=prompt+PROMPT_ENHANCEMENT )]))
+    functioncontent.append(types.Content(role='user', parts=[types.Part(text=prompt)]))
 
     evaluationagent.evaluation_agent(prompt)
 
