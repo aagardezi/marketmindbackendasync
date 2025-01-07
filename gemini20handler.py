@@ -232,7 +232,7 @@ def handel_gemini20_parallel_func(response,
     #testing
 
     if len(response.candidates[0].content.parts) >1:
-        response, backend_details, functioncontent, messages = handel_gemini20_parallel_func(response,
+        response, backend_details, functioncontent, aicontent, messages = handel_gemini20_parallel_func(response,
                                                                         api_requests_and_responses,
                                                                         backend_details, functioncontent,
                                                                         handle_external_function, generate_config_20, 
@@ -240,7 +240,7 @@ def handel_gemini20_parallel_func(response,
 
             
     logger.warning("gemini api response completed")
-    return response,backend_details, functioncontent, messages
+    return response,backend_details, functioncontent, aicontent, messages
 
 def handle_gemini20_serial_func(response, 
                                 api_requests_and_responses, 
@@ -302,7 +302,7 @@ def handle_gemini20_serial_func(response,
             #testing
 
             if len(response.candidates[0].content.parts) >1:
-                response, backend_details, functioncontent, messages = handel_gemini20_parallel_func(response,
+                response, backend_details, functioncontent, aicontent, messages = handel_gemini20_parallel_func(response,
                                                                         api_requests_and_responses,
                                                                         backend_details, functioncontent, handle_external_function, 
                                                                         generate_config_20, aicontent, 
@@ -314,7 +314,7 @@ def handle_gemini20_serial_func(response,
         except AttributeError as e:
             logger.warning(e)
             function_calling_in_process = False
-    return response,backend_details, functioncontent, messages
+    return response,backend_details, functioncontent, aicontent, messages
 
 
 @retry(wait=wait_random_exponential(multiplier=1, max=60))
@@ -465,7 +465,7 @@ def handle_gemini20(prompt, aicontent, logger, PROJECT_ID, LOCATION):
     aicontent.append(response.candidates[0].content)
     #testing
     if len(response.candidates[0].content.parts) >1:
-        response, backend_details, functioncontent = handel_gemini20_parallel_func(response, 
+        response, backend_details, functioncontent, aicontent, messages = handel_gemini20_parallel_func(response, 
                                                                                     api_requests_and_responses, 
                                                                                     backend_details, functioncontent, 
                                                                                     handle_external_function, generate_config_20,
@@ -474,7 +474,7 @@ def handle_gemini20(prompt, aicontent, logger, PROJECT_ID, LOCATION):
 
 
     else:
-        response, backend_details, functioncontent = handle_gemini20_serial_func(response, 
+        response, backend_details, functioncontent, aicontent, messages = handle_gemini20_serial_func(response, 
                                                                                     api_requests_and_responses, 
                                                                                     backend_details, functioncontent, 
                                                                                     handle_external_function, generate_config_20,
