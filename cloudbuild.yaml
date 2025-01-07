@@ -1,7 +1,12 @@
 steps:
-  # Build the zip file
-  - name: 'gcr.io/cloud-builders/zip'
-    args: ['-r', 'code.zip', '.']
+  # Build the zip file using a custom Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: 
+      - '-c'
+      - |
+        apt-get update && apt-get install -y zip
+        zip -r code.zip .
     id: 'zip-code'
 
   # Upload the zip file to Cloud Storage
