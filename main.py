@@ -28,5 +28,7 @@ def hello_gemini(cloud_event):
     logger.warning(f"Gemini request context ready: {aicontent}")
     
     if model == "gemini-2.0-flash-exp":
-        gemini20handler.handle_gemini20(prompt, aicontent, logger, PROJECT_ID, LOCATION)
+        fullresponse = gemini20handler.handle_gemini20(prompt, aicontent, logger, PROJECT_ID, LOCATION)
+        logger.warning(f"Completed and response is: {fullresponse}")
+
 
